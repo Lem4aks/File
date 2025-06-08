@@ -1,0 +1,229 @@
+/* Сброс отступов и box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Основной фон и шрифт */
+body {
+  background-color: #f0f0f0;
+  color: #333;
+  font-family: sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Чтобы контент занимал всю высоту */
+html, body {
+  width: 100%;
+  margin: 0;
+}
+
+/* Шапка (Header) */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8f9fa;
+  padding: 8px 16px;
+  border-bottom: 1px solid #ccc;
+}
+.header .logo h1 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+}
+.header-buttons {
+  display: flex;
+  gap: 8px;
+}
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.icon-btn:hover {
+  background-color: #e6e6e6;
+  border-radius: 4px;
+}
+
+/* Основная часть (Content) */
+.content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Боковая панель (Sidebar) */
+.sidebar {
+  width: 160px;
+  background-color: #f2f2f2;
+  padding: 8px;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+}
+.sidebar ul {
+  list-style: none;
+}
+.sidebar .title {
+  margin: 8px 0;
+  font-weight: bold;
+  color: #555;
+}
+.quick-item {
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+.quick-item:hover {
+  background-color: #e2e4e5;
+}
+.quick-item.active {
+  background-color: #2d72d2;
+  color: #fff;
+}
+
+/* BookView (2 панели) */
+.book-view {
+  flex: 1;
+  display: flex;
+  gap: 8px; /* Расстояние между панелями */
+  padding: 8px;
+  overflow: hidden;
+}
+
+/* Панель (Panel) */
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  min-width: 0; /* Чтобы правильно сворачивался при resize */
+}
+.panel.active {
+  border: 2px solid #2d72d2;
+}
+
+/* Панель вкладок */
+.tabs {
+  display: flex;
+  align-items: center;
+  background-color: #e4e4e4;
+  padding: 4px;
+  gap: 4px;
+  border-bottom: 1px solid #ccc;
+}
+.tab {
+  display: inline-flex;
+  align-items: center;
+  background-color: #d7d7d7;
+  color: #333;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+.tab.active {
+  background-color: #2d72d2;
+  color: #fff;
+}
+.tab button.close-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  margin-left: 4px;
+  cursor: pointer;
+}
+.tab-add {
+  background: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* Навигационная панель (кнопки Back, Forward и т.п.) */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-bottom: 1px solid #ccc;
+}
+.nav-bar .icon-btn {
+  font-size: 0.9rem;
+}
+
+/* Путь + кнопка Refresh */
+.path-input {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background-color: #f4f4f4;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+.path-input input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #333;
+  padding: 4px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+/* Заголовки столбцов (Name, Date, Size) */
+.list-header {
+  display: grid;
+  grid-template-columns: 1fr 120px 80px;
+  padding: 4px;
+  background-color: #e8e8e8;
+  border-bottom: 1px solid #ccc;
+}
+.list-header p {
+  font-weight: bold;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Список файлов/папок */
+.file-list {
+  flex: 1;
+  overflow-y: auto;
+}
+.file-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 80px;
+  padding: 6px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.file-row:hover {
+  background-color: #f5f5f5;
+}
+.file-row.selected {
+  background-color: #2d72d2;
+  color: #fff;
+}
+.file-row.hovered {
+  background-color: #e6e6e6;
+}
+.file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.file-date {
+  text-align: left;
+  color: #333;
+}
+.file-size {
+  text-align: right;
+  color: #333;
+}

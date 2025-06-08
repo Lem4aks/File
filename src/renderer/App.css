@@ -1,0 +1,736 @@
+/* Светлая тема (по умолчанию) */
+/* Остальные ваши стили остаются без изменений */
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: linear-gradient(to bottom, #f5f5f5, #e6ecef);
+  box-sizing: border-box;
+  border-bottom: 1px solid #bdc3c7;
+}
+
+.logo,
+h1 {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.HeaderB {
+  display: flex;
+  gap: 10px;
+}
+
+/* Explorer Styles */
+.Expl {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content Styles */
+.Content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Left Sidebar Styles */
+.left {
+  width: 150px;
+  flex: 0 0 150px;
+  background-color: #e6ecef;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Main Content Styles */
+.Main {
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Book View Styles */
+.BookView {
+  flex:1;
+  display: flex;
+  overflow: hidden;
+}
+.Main1,
+.Main2 {
+  flex: 1; 
+  box-sizing: border-box;
+  border-left: 1px solid #ccc;
+  overflow: hidden;
+}
+
+.Main1.active,
+.Main2.active {
+  border: 2px solid #2d72d2;
+}
+
+/* Single View Styles */
+.SingleView {
+  flex: 1;
+  border-left: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* User Controls Styles */
+.User {
+  display: flex;
+}
+
+/* Path Container Styles */
+.PathContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Инпут внутри Path растягивается на всю ширину */
+.Path input {
+  flex: 1;
+  padding: 6px;
+  font-size: 16px;
+}
+
+.Path {
+  flex-grow: 1;
+  display: flex;              /* Располагаем элементы в строку */
+  align-items: center;        /* Центрируем элементы по вертикали */
+  border: 1px solid #ccc;     /* Рамка вокруг всего контейнера */
+  border-radius: 2px;         /* Скруглённые углы */
+  overflow: hidden;           /* Чтобы содержимое не выходило за рамки */
+  background-color: transparent; /* Если хотите прозрачный фон */
+}
+
+.Path input {
+  flex: 1;                    /* Заставляет input занимать всю оставшуюся ширину */
+  border: none;               /* Убираем стандартную рамку */
+  padding: 6px 8px;           /* Внутренний отступ для удобства */
+  font-size: 16px;            /* Размер шрифта */
+  background: transparent;    /* Прозрачный фон для соответствия общему стилю */
+  outline: none;              /* Убираем обводку при фокусе */
+}
+
+/* Стили для панели поиска */
+.Search {
+  flex-grow: 1;
+  display: flex;             /* Располагаем элементы в строку */
+  align-items: center;       /* Центрируем элементы по вертикали */
+  border: 1px solid #ccc;    /* Рамка вокруг всего контейнера */
+  border-radius: 2px;        /* Скруглённые углы */
+  overflow: hidden;          /* Чтобы содержимое не выходило за рамки */
+  background-color: transparent;
+  margin-left: 10px;         /* Отступ от поля пути */
+  max-width: 250px;          /* Ограничиваем ширину */
+}
+
+.Search input {
+  flex: 1;                   /* Заставляет input занимать всю оставшуюся ширину */
+  border: none;              /* Убираем стандартную рамку */
+  padding: 6px 8px;          /* Внутренний отступ для удобства */
+  font-size: 16px;           /* Размер шрифта */
+  background: transparent;   /* Прозрачный фон для соответствия общему стилю */
+  outline: none;             /* Убираем обводку при фокусе */
+}
+
+.Search button {
+  background: transparent;   /* Прозрачный фон у кнопки */
+  border: none;              /* Убираем стандартную рамку */
+  padding: 6px 8px;          /* Отступы, чтобы иконка не прилипала к input */
+  cursor: pointer;           /* Курсор pointer при наведении */
+}
+
+.Search button:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Небольшой эффект при наведении */
+}
+
+.Path button {
+  background: transparent;    /* Прозрачный фон у кнопки */
+  border: none;               /* Убираем стандартную рамку */
+  padding: 6px 8px;           /* Отступы, чтобы иконка не прилипала к input */
+  cursor: pointer;            /* Курсор pointer при наведении */
+}
+
+.Path button:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Небольшой эффект при наведении */
+}
+
+/* Sort Styles */
+.Sort {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 125px) minmax(0, 80px);
+  background-color: #e6ecef;
+}
+
+li {
+  list-style: none;
+}
+
+/* Folder Styles */
+.Folder {
+  min-height: 40px;
+  overflow-y: auto;
+  flex-grow: 1;
+  user-select: none;
+}
+
+.file-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 100px) minmax(0, 80px);
+  border: 2px;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+/* Контейнер для имени файла с разделением на базовую часть и расширение */
+.file-name {
+  display: inline-flex;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.file-name-base {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-extension {
+  flex-shrink: 0;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+/* Колонки для даты и размера */
+.file-date {
+  padding: auto;
+}
+
+.file-size {
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Count Styles */
+.Count {
+  background-color: blue;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Global Styles */
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+p {
+  margin: 0;
+  padding: 6px;
+  font-size: 16px;
+}
+
+/* Быстрый доступ (Quick Access) – ярлыки */
+.quick-access-item {
+  background-color: transparent;
+  cursor: pointer;
+  padding: 4px 8px;
+  list-style: none;
+  transition: background-color 0.2s ease;
+}
+
+ul {
+  padding-left: 5px;
+}
+
+.quick-access-item.active {
+  background-color: #137cbd;
+  color: white;
+}
+
+.quick-access-item.hovered {
+  background-color: #d3d3d3;
+  color: inherit;
+}
+
+/* Диски */
+.disk-item {
+  background-color: transparent;
+  cursor: pointer;
+  padding: 4px 8px;
+  list-style: none;
+  transition: background-color 0.2s ease;
+}
+
+.disk-item.hovered {
+  background-color: #d3d3d3;
+}
+
+/* Файловые элементы */
+.file-item {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.file-item.selected {
+  background-color: #137cbd;
+  color: white;
+}
+
+.file-item.dselect  {
+  background-color: #8a9ba8;
+  color: white;
+}
+
+.file-item.hovered {
+  background-color: #d9e0e4;
+}
+
+/* Стили для кнопок в диалоговом окне */
+.dialog-buttons button {
+  margin-right: 4px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-dialog {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+}
+
+.Multopen {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-height: 50px;
+  position: relative;
+  scrollbar-width: thin;
+  width: 100%;
+}
+
+.Multopen::-webkit-scrollbar {
+  height: 4px;
+}
+
+.Multopen::-webkit-scrollbar-thumb {
+  background-color: #bdc3c7;
+  border-radius: 4px;
+}
+
+.Multopen .tab {
+  display: inline-flex;
+  align-items: center;
+  border-bottom: none;
+  padding: 9px;
+  color: black;
+  min-width: 50px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 0 1 auto;
+}
+
+.Multopen .tab button {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+/* Стиль для кнопки добавления - всегда видима */
+.Multopen .NOB {
+  position: sticky;
+  right: 0;
+  background: inherit;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  z-index: 1;
+}
+
+/* Стили для режима одной панели */
+.SingleView {
+  width: 100%;
+  max-width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.SingleView .Multopen {
+  width: 100%;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+.SingleView .Main {
+  flex: 1;
+  width: 100%;
+}
+
+/* ------------- Левая панель ------------- */
+/* Если левая панель активна */
+.Main.left-page.active .Multopen .tab {
+  border-radius: 4px;
+  background-color: #d3d3d3;
+  color: black;
+}
+/* Текущая активная вкладка — синяя */
+.Main.left-page.active .Multopen .tab.active {
+  border-radius: 4px;
+  background-color: #2d72d2;
+  color: white;
+}
+/* Если левая панель неактивна — серые вкладки */
+.Main.left-page:not(.active) .Multopen .tab {
+  border-radius: 4px;
+  background-color: #555;
+  color: white;
+}
+
+/* ------------- Правая панель ------------- */
+/* Если правая панель активна */
+.Main.right-page.active .Multopen .tab {
+  border-radius: 4px;
+  background-color: #d3d3d3;
+  color: black;
+}
+/* Текущая активная вкладка — синяя */
+.Main.right-page.active .Multopen .tab.active {
+  border-radius: 4px;
+  background-color: #2d72d2;
+  color: white;
+}
+/* Если правая панель неактивна — серые вкладки */
+.Main.right-page:not(.active) .Multopen .tab {
+  border-radius: 4px;
+  background-color: #555;
+  color: white;
+}
+
+/* --------------------------------------------------------------------- */
+/* Стили для тёмной темы */
+/* Добавьте класс .dark-theme к body или корневому контейнеру */
+.dark-theme {
+  background-color: #293842;
+  color: #e0e0e0;
+}
+
+/* Тёмная тема для шапки */
+.dark-theme .Header {
+  background: linear-gradient(to bottom, #383838, #283744);
+  border-bottom: 1px solid #0e1922;
+}
+
+/* Тёмная тема для боковой панели */
+.dark-theme .left {
+  background-color: #293842;
+}
+
+/* Тёмная тема для основной панели */
+.dark-theme .Main {
+  background-color: #293842;
+  color: #e0e0e0;
+}
+
+/* Тёмная тема для быстрого доступа */
+.dark-theme .quick-access-item.active {
+  background-color: #2d72d2;
+}
+.dark-theme .quick-access-item.hovered,
+.dark-theme .disk-item.hovered,
+.dark-theme .tag-item.hovered {
+  background-color: #3a4753;
+}
+
+/* Стили для тегов */
+.left li:not(.quick-access-item):not(.disk-item):not(.tag-item):not(.empty-item) {
+  color: #414754;
+  font-weight: 500;
+  cursor: default;
+  margin-top: 10px;
+}
+
+/* Стили для секции тегов */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px !important;
+  margin-bottom: 10px !important;
+  padding: 0 !important;
+  font-weight: 600;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  padding: 5px 8px !important;
+  transition: background-color 0.2s;
+}
+
+.tag-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.tag-name {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tag-count {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 2px 6px;
+  font-size: 11px;
+  margin-left: 5px;
+}
+
+.empty-item {
+  font-style: italic;
+  color: #777;
+  padding: 5px 8px !important;
+  cursor: default !important;
+}
+
+/* Тёмная тема для тегов */
+.dark-theme .tag-count {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .empty-item {
+  color: #aaa;
+}
+
+/* Стили для диалога создания тега */
+.tag-dialog .color-picker-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tag-dialog .color-input {
+  height: 30px;
+  width: 50px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.tag-dialog .color-preview {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.tag-dialog .color-value {
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.tag-dialog .predefined-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.tag-dialog .color-option {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tag-dialog .color-option:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tag-dialog .color-option.selected {
+  border: 2px solid #000;
+  transform: scale(1.1);
+}
+
+.dark-theme .tag-dialog .color-option.selected {
+  border: 2px solid #fff;
+}
+
+.tag-dialog .error-message {
+  color: #f44336;
+  margin-bottom: 10px;
+  padding: 8px;
+  background-color: rgba(244, 67, 54, 0.1);
+  border-radius: 4px;
+}
+.dark-theme .file-item.hovered {
+  background-color: #3a4753;
+}
+
+.dark-theme .file-item {
+  border-bottom: 1px solid #394855;
+}
+
+/* Тёмные стили для диалогового окна */
+.dark-theme .modal-dialog {
+  background: #293742;
+}
+
+.dark-theme .Main.left-page.active .Multopen .tab {
+  background-color: #383e47;
+  color: white;
+}
+/* Если левая панель неактивна — серые вкладки */
+.dark-theme .Main.left-page:not(.active) .Multopen .tab {
+  background-color: #58646d;
+  color: white;
+}
+.dark-theme .Main.right-page.active .Multopen .tab.active {
+  background-color: #2d72d2;
+  color: white;
+}
+.dark-theme .Main.left-page.active .Multopen .tab.active {
+  background-color: #2d72d2;
+  color: white;
+}
+
+.dark-theme .Main1,
+.Main2 {
+  border-left: 1px solid #0e1922;
+}
+
+.dark-theme .Main1.active,
+.Main2.active {
+  border: 2px solid #2d72d2;
+}
+
+.dark-theme .SingleView {
+  border-left: 1px solid #0e1922;
+}
+
+/* ------------- Правая панель ------------- */
+/* Если правая панель активна */
+.dark-theme .Main.right-page.active .Multopen .tab {
+  border-radius: 4px;
+  background-color: #383e47;
+  color: white;
+}
+/* Если правая панель неактивна — серые вкладки */
+.dark-theme .Main.right-page:not(.active) .Multopen .tab {
+  border-radius: 4px;
+  background-color: #58646d;
+  color: white;
+}
+
+/* Пример для элементов вкладок (Multopen) */
+.dark-theme .Multopen .tab {
+  border-radius: 4px;
+  background-color: #293742;
+}
+.dark-theme .Multopen .tab.active {
+  border-radius: 4px;
+  background-color: #2d72d2; /* можно оставить акцентной */
+}
+
+.dark-theme button{
+  background-color: #383e47;
+  border-right: 1px solid #4c525a;
+  border-bottom: none;
+}
+
+.dark-theme .Sort{
+  background-color: #425461;
+}
+.dark-theme .NOB{
+  border: none;
+  background-color: transparent;
+}
+.dark-theme .NOB:hover{
+  background-color: #30496a;
+}
+.NOB:hover{
+  background-color: #b3cae8;
+}
+.dark-theme .NOBS{
+  cursor: pointer;  
+  background-color: #222c35;
+}
+.NOB{
+  background-color: transparent;
+  cursor: pointer;  
+  border: none;
+}
+
+.dark-theme .Path input{
+  background-color: #222c35;
+  color: white;
+}
+
+.dark-theme .Search {
+  border: 1px solid #4c525a;
+}
+
+.dark-theme .Search input{
+  background-color: #222c35;
+  color: white;
+}
+
+.dark-theme .Search button:hover {
+  background-color: #30496a;
+}

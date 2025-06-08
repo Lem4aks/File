@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Explorer Mockup</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Заголовок (Header) -->
+  <div class="header">
+    <div class="logo">
+      <h1>Explorer</h1>
+    </div>
+    <div class="header-buttons">
+      <!-- Кнопка Book/Single -->
+      <button class="icon-btn" title="Toggle Book Mode">
+        <!-- Вместо текста можно вставить SVG-иконку -->
+        <span>🔳</span>
+      </button>
+      <!-- Кнопка переключения темы -->
+      <button class="icon-btn" title="Toggle Theme">
+        <span>🌙</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Основная часть (Content) -->
+  <div class="content">
+    <!-- Боковая панель (Short, Docs, Downloads...) -->
+    <div class="sidebar">
+      <ul>
+        <li class="title">Short</li>
+        <li class="quick-item active">Documents</li>
+        <li class="quick-item">Downloads</li>
+        <li class="quick-item">Desktop</li>
+        <li class="title">Disk</li>
+        <li class="quick-item">C:\</li>
+        <li class="quick-item">D:\</li>
+        <li class="quick-item">E:\</li>
+      </ul>
+    </div>
+
+    <!-- Две панели (BookView) -->
+    <div class="book-view">
+      <!-- Левая панель -->
+      <div class="panel">
+        <!-- Панель вкладок -->
+        <div class="tabs">
+          <div class="tab active">
+            <span>С:</span>
+            <button class="close-btn">×</button>
+          </div>
+          <div class="tab">
+            <span>D:</span>
+            <button class="close-btn">×</button>
+          </div>
+          <button class="tab-add">+</button>
+        </div>
+        <!-- Панель управления (Back, Forward, Parent, NewFolder...) + путь + Refresh -->
+        <div class="nav-bar">
+          <button class="icon-btn" title="Back">◀</button>
+          <button class="icon-btn" title="Forward">▶</button>
+          <button class="icon-btn" title="Parent">⬆</button>
+          <button class="icon-btn" title="New Folder">📁+</button>
+          <div class="path-input">
+            <input type="text" value="C:\" />
+            <button class="icon-btn">↻</button>
+          </div>
+        </div>
+        <!-- Заголовки колонок -->
+        <div class="list-header">
+          <p>Name</p>
+          <p>Date</p>
+          <p>Size</p>
+        </div>
+        <!-- Список файлов/папок -->
+        <div class="file-list">
+          <p class="file-row">
+            <span class="file-name">Program Files</span>
+            <span class="file-date">11.04.2025</span>
+            <span class="file-size">--</span>
+          </p>
+          <p class="file-row selected">
+            <span class="file-name">Windows</span>
+            <span class="file-date">12.04.2025</span>
+            <span class="file-size">--</span>
+          </p>
+          <p class="file-row">
+            <span class="file-name">Users</span>
+            <span class="file-date">11.03.2025</span>
+            <span class="file-size">--</span>
+          </p>
+          <p class="file-row hovered">
+            <span class="file-name">pagefile.sys</span>
+            <span class="file-date">10.04.2025</span>
+            <span class="file-size">100 MB</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Правая панель -->
+      <div class="panel">
+        <div class="tabs">
+          <div class="tab active">
+            <span>D:\</span>
+            <button class="close-btn">×</button>
+          </div>
+          <button class="tab-add">+</button>
+        </div>
+        <div class="nav-bar">
+          <button class="icon-btn" title="Back">◀</button>
+          <button class="icon-btn" title="Forward">▶</button>
+          <button class="icon-btn" title="Parent">⬆</button>
+          <button class="icon-btn" title="New Folder">📁+</button>
+          <div class="path-input">
+            <input type="text" value="D:\" />
+            <button class="icon-btn">↻</button>
+          </div>
+        </div>
+        <div class="list-header">
+          <p>Name</p>
+          <p>Date</p>
+          <p>Size</p>
+        </div>
+        <div class="file-list">
+          <p class="file-row">
+            <span class="file-name">Folder1</span>
+            <span class="file-date">11.02.2025</span>
+            <span class="file-size">--</span>
+          </p>
+          <p class="file-row">
+            <span class="file-name">setup.exe</span>
+            <span class="file-date">12.03.2025</span>
+            <span class="file-size">2 MB</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
