@@ -7,7 +7,6 @@ interface FilePanelHookProps {
   platform: string;
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export const useFilePanel = ({
   pathSeparator,
   platform,
@@ -128,7 +127,7 @@ export const useFilePanel = ({
     setRefreshTrigger((prev) => !prev);
   }, []);
 
-  // Функция для обновления вкладки
+  // Function to update tab
   const updateTab = useCallback((updatedTab: PanelTab) => {
     setTabs((prevTabs) =>
       prevTabs.map((tab) => (tab.id === updatedTab.id ? updatedTab : tab)),

@@ -22,7 +22,7 @@ const TagDialog: React.FC<TagDialogProps> = ({
 
   const handleSave = async () => {
     if (!name.trim()) {
-      setError('Название тега не может быть пустым');
+      setError('Tag name cannot be empty');
       return;
     }
 
@@ -36,7 +36,7 @@ const TagDialog: React.FC<TagDialogProps> = ({
       onClose();
     } catch (err) {
       console.error('Error saving tag:', err);
-      setError('Произошла ошибка при сохранении тега');
+      setError('An error occurred while saving the tag');
     }
   };
 
@@ -56,20 +56,20 @@ const TagDialog: React.FC<TagDialogProps> = ({
   return (
     <div className="modal-overlay">
       <div className="modal-dialog tag-dialog">
-        <h3>{tag ? 'Редактировать тег' : 'Создать новый тег'}</h3>
+        <h3>{tag ? 'Edit tag' : 'Create new tag'}</h3>
         {error && <div className="error-message">{error}</div>}
         <div className="dialog-content">
-          <FormGroup label="Название" labelFor="tag-name">
+          <FormGroup label="Name" labelFor="tag-name">
             <InputGroup
               id="tag-name"
-              placeholder="Введите название тега"
+              placeholder="Enter tag name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               autoFocus
             />
           </FormGroup>
           
-          <FormGroup label="Цвет" labelFor="tag-color">
+          <FormGroup label="Color" labelFor="tag-color">
             <div className="color-picker-container">
               <input
                 type="color"
@@ -87,9 +87,9 @@ const TagDialog: React.FC<TagDialogProps> = ({
           </FormGroup>
         </div>
         <div className="dialog-buttons">
-          <Button onClick={handleClose}>Отмена</Button>
+          <Button onClick={handleClose}>Cancel</Button>
           <Button intent="primary" onClick={handleSave}>
-            {tag ? 'Сохранить' : 'Создать'}
+            {tag ? 'Save' : 'Create'}
           </Button>
         </div>
       </div>

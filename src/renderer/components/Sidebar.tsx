@@ -69,7 +69,6 @@ const Sidebar: React.FC<SidebarProps> = ({
     };
   }, []);
   
-  // Обработчик сохранения нового тега
   const handleTagSave = async (tag: FileTag) => {
     try {
       if (tagToEdit) {
@@ -90,23 +89,41 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   };
   
-  // Открываем диалог для создания или редактирования тега
+  // Open dialog to create or edit tag
   const openTagDialog = (tag?: FileTag) => {
     setTagToEdit(tag);
     setIsTagDialogOpen(true);
   };
   
-  // Закрываем диалог
+  // Close dialog
   const closeTagDialog = () => {
     setIsTagDialogOpen(false);
     setTagToEdit(undefined);
   };
-  // Функция для обработки клика по тегу
+  // Function to handle tag click
   const handleTagClick = (tag: FileTag | null) => {
-    if (onTagClick && tag) {
-      onTagClick(tag);
+    if (!tag) {
+      if (onTagClick) onTagClick(null);
+      return;
+    }
+    if (onTagClick) onTagClick(tag);
+  };
+
+
+  // Function to handle tag deletion
+  const handleDeleteTag = async (tag: FileTag) => {
+    if (!tag?.id) return;
+    if (window.confirm(`Are you sure you want to delete the tag "${tag.name}"?`)) {
+      try {
+        await tagService.removeTag(tag.id);
+        fetchTags();
+        if (onTagClick) onTagClick(null); // Deselect if deleted
+      } catch (error) {
+        console.error('Error deleting tag:', error);
+      }
     }
   };
+
 
   return (
     <div className="left">
@@ -126,6 +143,9 @@ const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => onShortcutClick(shortcut.path)}
               onMouseEnter={() => setHoveredShortcutIndex(index)}
               onMouseLeave={() => setHoveredShortcutIndex(null)}
+              style={{
+                display:'flex'
+              }}
             >
               <Icon
                 icon={getIconForShortcut(shortcut.name)}
@@ -155,6 +175,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                 onClick={() => onDiskSelect(value)}
                 onMouseEnter={() => setHoveredDiskIndex(index)}
                 onMouseLeave={() => setHoveredDiskIndex(null)}
+                style={{
+                  display:'flex'
+                }}
               >
                 <Icon
                   icon={IconNames.INBOX}
@@ -166,7 +189,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             );
           })
         ) : (
-          <p>Диски не найдены</p>
+          <p>No drives found</p>
         )}
         <li className="section-header">
           <span>Tags</span>
@@ -175,15 +198,15 @@ const Sidebar: React.FC<SidebarProps> = ({
             small
             icon={IconNames.PLUS}
             onClick={() => openTagDialog()}
-            title="Добавить новый тег"
+            title="Add new tag"
           />
         </li>
         {isTagsLoading ? (
-          <li>Загрузка тегов...</li>
+          <li>Loading tags...</li>
         ) : tags.length > 0 ? (
           tags.filter(tag => tag !== null).map((tag, index) => (
             <li
-              key={tag?.id || `tag-${index}`}
+              key={tag?.id || index}
               className={`tag-item ${hoveredTagIndex === index ? 'hovered' : ''}`}
               onClick={() => handleTagClick(tag)}
               onMouseEnter={() => setHoveredTagIndex(index)}
@@ -193,12 +216,28 @@ const Sidebar: React.FC<SidebarProps> = ({
                 className="tag-color"
                 style={{ backgroundColor: tag?.color || '#cccccc' }}
               />
-              <span className="tag-name">{tag?.name || 'Безымянный тег'}</span>
+              <span className="tag-name">{tag?.name || 'Unnamed tag'}</span>
               <span className="tag-count">{tag?.paths?.length || 0}</span>
+              <button
+                className="delete-tag-btn"
+                title="Delete tag"
+                onClick={e => {
+                  e.stopPropagation();
+                  handleDeleteTag(tag);
+                }}
+                style={{ marginLeft: 6, background: 'none', border: 'none', cursor: 'pointer', color: '#c00', display: 'inline-flex', alignItems: 'center' }}
+                aria-label="Delete tag"
+              >
+                {IconNames && IconNames.TRASH ? (
+                  <Icon icon={IconNames.TRASH} iconSize={14} />
+                ) : (
+                  <span role="img" aria-label="Delete">🗑️</span>
+                )}
+              </button>
             </li>
           ))
         ) : (
-          <li className="empty-item">Теги не созданы</li>
+          <li className="empty-item">No tags created</li>
         )}
       </ul>
       

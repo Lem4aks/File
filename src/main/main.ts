@@ -183,7 +183,8 @@ const createWindow = async () => {
       if (platform === 'darwin') {
         return disks
           .map((disk) => disk.mounted)
-          .filter((p: string) => p.startsWith('/Volumes'));
+          .filter((p: string) => p.startsWith('/Volumes/'))
+          .map((p: string) => p.replace('/Volumes/', ''));
       }
       if (platform === 'linux') {
         return disks
@@ -435,14 +436,12 @@ const createWindow = async () => {
 
   ipcMain.handle('add-tag', async (event, tag) => {
     const result = await addTag(tag);
-    // Notify renderer that tags have been updated
     event.sender.send('tags-updated');
     return result;
   });
 
   ipcMain.handle('update-tag', async (event, tag) => {
     const result = await updateTag(tag);
-    // Notify renderer that tags have been updated
     event.sender.send('tags-updated');
     return result;
   });

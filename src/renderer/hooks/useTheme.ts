@@ -2,8 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 
 export const useTheme = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
-
-  // Load theme from localStorage on component mount
+  
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
@@ -11,7 +10,6 @@ export const useTheme = () => {
     }
   }, []);
 
-  // Toggle theme and save to localStorage
   const toggleTheme = useCallback(() => {
     setIsDarkTheme(prev => {
       const newTheme = !prev;

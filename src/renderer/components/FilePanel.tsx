@@ -75,12 +75,11 @@ const FilePanel: React.FC<FilePanelProps> = ({
 }) => {
   const [inputPath, setInputPath] = useState(currentTab?.currentPath || '');
   
-  // Получение полного пути выбранного файла для отображения в панели навигации в режиме тегов
   const getSelectedFilePath = () => {
     if (currentTab?.isTagMode && selectedFileIndex !== null && files[selectedFileIndex]) {
-      return files[selectedFileIndex].originalPath || ''; // Возвращаем полный путь в режиме тегов
+      return files[selectedFileIndex].originalPath || '';
     }
-    return ''; // Если не в режиме тегов или нет выбранного файла, возвращаем пустую строку
+    return '';
   };
 
   const handlePathChange = (path: string) => {
@@ -89,13 +88,11 @@ const FilePanel: React.FC<FilePanelProps> = ({
   };
 
   const handleDoubleClick = (isDirectory: boolean, name: string, index: number) => {
-    // Если передан внешний обработчик двойного клика, используем его
     if (onFileDoubleClick) {
       onFileDoubleClick(index);
       return;
     }
     
-    // Стандартное поведение при двойном клике
     if (isDirectory) {
       onFolderOpen(name, index);
     } else {

@@ -1,12 +1,6 @@
 import { FileItem } from '../types';
 
-/**
- * Service for handling file system operations through IPC
- */
 class FileService {
-  /**
-   * Get files in a directory
-   */
   async getFiles(path: string): Promise<FileItem[]> {
     try {
       return await window.electron.ipcRenderer.invoke('get-files', path);
@@ -16,9 +10,6 @@ class FileService {
     }
   }
 
-  /**
-   * Get parent directory
-   */
   async getParentDirectory(path: string): Promise<string> {
     try {
       return await window.electron.ipcRenderer.invoke('get-parent', path);
@@ -28,10 +19,9 @@ class FileService {
     }
   }
 
-  /**
-   * Open a file using default application
-   */
-  async openFile(filePath: string): Promise<{ success: boolean; error?: string }> {
+  async openFile(
+    filePath: string,
+  ): Promise<{ success: boolean; error?: string }> {
     try {
       return await window.electron.ipcRenderer.invoke('open-file', filePath);
     } catch (error) {
@@ -40,9 +30,6 @@ class FileService {
     }
   }
 
-  /**
-   * Get platform information
-   */
   async getPlatform(): Promise<string> {
     try {
       return await window.electron.ipcRenderer.invoke('get-platform');
@@ -52,9 +39,6 @@ class FileService {
     }
   }
 
-  /**
-   * Create a new folder
-   */
   async createFolder(parentPath: string, folderName: string): Promise<boolean> {
     try {
       console.log('[fileService] Creating folder. Params:', {
@@ -63,20 +47,20 @@ class FileService {
         folderNameLength: folderName ? folderName.length : 0,
         isEmptyOrWhitespace: !folderName || folderName.trim() === '',
       });
-      
-      // Убедимся, что имя папки определено и не пустое
+
       if (!folderName || folderName.trim() === '') {
         console.error('[fileService] Rejected empty folder name');
         return false;
       }
-      
-      // Передаем параметры как единый объект вместо отдельных аргументов
-      // для избежания проблем с IPC и кириллицей
+
       const params = { parentPath, folderName };
       console.log('[fileService] Sending params as object:', params);
-      
-      const result = await window.electron.ipcRenderer.invoke('create-folder', params);
-      
+
+      const result = await window.electron.ipcRenderer.invoke(
+        'create-folder',
+        params,
+      );
+
       console.log('[fileService] Folder creation result:', result);
       return result;
     } catch (error) {
@@ -85,9 +69,6 @@ class FileService {
     }
   }
 
-  /**
-   * Get available disks (Windows: string[], Linux: DiskInfo[])
-   */
   async getAvailableDisks(): Promise<string[] | DiskInfo[]> {
     try {
       return await window.electron.ipcRenderer.invoke('get-disks');
@@ -102,6 +83,5 @@ export interface DiskInfo {
   device: string;
   mount: string;
 }
-
 
 export default new FileService();

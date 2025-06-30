@@ -118,7 +118,7 @@ const FileExplorer: React.FC = () => {
       if (tag) {
         await loadTagFiles(tag, isLeft);
       } else {
-        console.error(`Тег с ID ${tagId} не найден`);
+        console.error(`Tag with ID ${tagId} not found`);
         if (isLeft) {
           left.setFiles([]);
         } else {
@@ -126,7 +126,7 @@ const FileExplorer: React.FC = () => {
         }
       }
     } catch (error) {
-      console.error('Ошибка при загрузке тега:', error);
+      console.error('Error loading tag:', error);
       if (isLeft) {
         left.setFiles([]);
       } else {
@@ -420,7 +420,7 @@ const FileExplorer: React.FC = () => {
           const filesData = await fileService.getFiles(formattedDisk);
           setFiles(filesData);
         } catch (error) {
-          console.error(`Ошибка загрузки файлов диска ${formattedDisk}:`, error);
+          console.error(`Error loading disk files ${formattedDisk}:`, error);
           setFiles([]);
         }
         return; 
@@ -450,7 +450,7 @@ const FileExplorer: React.FC = () => {
           const filesData = await fileService.getFiles(shortcutPath);
           setFiles(filesData);
         } catch (error) {
-          console.error(`Ошибка загрузки файлов ярлыка ${shortcutPath}:`, error);
+          console.error(`Error loading shortcut files ${shortcutPath}:`, error);
           setFiles([]);
         }
         return; 
@@ -532,7 +532,7 @@ const FileExplorer: React.FC = () => {
           tagService.TAG_CHANNEL.REMOVE_PATH_FROM_TAG,
           { tagId, path: filePath }
         );
-        console.log(`Удален тег с ID ${tagId} из файла ${filePath}`);
+        console.log(`Tag with ID ${tagId} removed from file ${filePath}`);
       }
 
       const isLeft = activePage === 'left';
@@ -596,7 +596,7 @@ const FileExplorer: React.FC = () => {
           { tagId: tag.id, path: filePath }
         );
 
-        console.log(`Добавлен тег ${tag.name} к файлу ${filePath}`);
+        console.log(`Tag ${tag.name} added to file ${filePath}`);
       }
 
       await fetchFiles(activePage === 'left');
@@ -689,9 +689,40 @@ const FileExplorer: React.FC = () => {
     setIsTagDialogOpen(true);
   };
   
-  const handleTagClick = async (tag: FileTag) => {
+  // Helper to clear tag mode or selection
+  const clearTagMode = async () => {
+    const panel = activePage === 'left' ? left : right;
+    if (panel.currentTab && panel.currentTab.isTagMode) {
+      const updatedTab = {
+        ...panel.currentTab,
+        isTagMode: false,
+        tagId: undefined,
+        tagColor: undefined,
+        name: '',
+      };
+      panel.updateTab(updatedTab);
+      // After exiting tag mode, reload files for the current path
+      if (panel.currentTab.currentPath) {
+        try {
+          const files = await fileService.getFiles(panel.currentTab.currentPath);
+          panel.setFiles(files);
+        } catch (error) {
+          panel.setFiles([]);
+        }
+      } else {
+        panel.setFiles([]);
+      }
+    }
+  };
+
+  const handleTagClick = async (tag: FileTag | null) => {
+    if (!tag) {
+      clearTagMode();
+      return;
+    }
     if (!tag.paths || tag.paths.length === 0) {
-      alert(`Тег "${tag.name}" пуст. Добавьте файлы в тег, чтобы перейти к нему.`);
+      alert(`Tag "${tag.name}" is empty. Add files to the tag to access it.`);
+      clearTagMode();
       return;
     }
     
@@ -725,7 +756,7 @@ const FileExplorer: React.FC = () => {
     const selectedTab = panel.tabs.find((tab) => tab.id === tabId);
     
     if (!selectedTab) {
-      console.error(`Вкладка с ID ${tabId} не найдена`);
+      console.error(`Tab with ID ${tabId} not found`);
       return;
     }
     
@@ -752,7 +783,7 @@ const FileExplorer: React.FC = () => {
           right.setFiles(filesData);
         }
       } catch (error) {
-        console.error(`Ошибка загрузки файлов для пути ${selectedTab.currentPath}:`, error);
+        console.error(`Error loading files for path ${selectedTab.currentPath}:`, error);
         if (isLeft) {
           left.setFiles([]);
         } else {

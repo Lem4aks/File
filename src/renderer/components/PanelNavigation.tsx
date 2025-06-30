@@ -52,7 +52,7 @@ const PanelNavigation: React.FC<PanelNavigationProps> = ({
           type="button"
           onClick={onBackClick}
           disabled={isTagMode || !currentTab || currentTab.currentIndex === 0}
-          title={isTagMode ? 'Навигация недоступна в режиме тегов' : 'Назад'}
+          title={isTagMode ? 'Navigation unavailable in tag mode' : 'Back'}
         >
           <Icon
             icon={IconNames.CHEVRON_LEFT}
@@ -119,9 +119,9 @@ const PanelNavigation: React.FC<PanelNavigationProps> = ({
           className={`Input ${isTagMode ? 'tag-mode' : ''}`}
           value={isTagMode 
             ? (path 
-                ? path // Если есть выбранный файл, показываем его полный путь
+                ? path 
                 : currentTab 
-                  ? `Тег: ${currentTab.name}` // Если нет выбранного файла, показываем имя тега
+                  ? `Тег: ${currentTab.name}`
                   : '') 
             : (path || currentTab?.currentPath || '')}
           onChange={(e) => !isTagMode && onPathChange(e.target.value)}

@@ -58,7 +58,7 @@ const FileItemComponent: React.FC<FileItemProps> = ({
       }}
       onDoubleClick={() => onDoubleClick(file.isDirectory, file.name, index)}
       onContextMenu={(e) => {
-        e.stopPropagation(); // Останавливаем всплытие события, чтобы не срабатывал родительский обработчик
+        e.stopPropagation();
         onContextMenu(e, filePath);
       }}
     >

@@ -1,7 +1,7 @@
 import { FileTag } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 
-// IPC канал для работы с тегами
+// IPC channel for working with tags
 export const TAG_CHANNEL = {
   LOAD_TAGS: 'load-tags',
   SAVE_TAGS: 'save-tags',
@@ -13,7 +13,7 @@ export const TAG_CHANNEL = {
   REMOVE_PATH_FROM_TAG: 'remove-path-from-tag',
 };
 
-// Функция для создания нового тега
+// Function to create a new tag
 export const createTag = (
   name: string,
   color: string,
@@ -29,7 +29,7 @@ export const createTag = (
   };
 };
 
-// Загрузка тегов с помощью IPC
+// Load tags using IPC
 export const loadTags = async (): Promise<FileTag[]> => {
   try {
     return await window.electron.ipcRenderer.invoke(TAG_CHANNEL.LOAD_TAGS);
@@ -39,7 +39,7 @@ export const loadTags = async (): Promise<FileTag[]> => {
   }
 };
 
-// Сохранение тегов с помощью IPC
+// Save tags using IPC
 export const saveTags = async (tags: FileTag[]): Promise<void> => {
   try {
     await window.electron.ipcRenderer.invoke(TAG_CHANNEL.SAVE_TAGS, tags);
@@ -48,7 +48,7 @@ export const saveTags = async (tags: FileTag[]): Promise<void> => {
   }
 };
 
-// Добавление нового тега
+// Add a new tag
 export const addTag = async (tag: FileTag): Promise<FileTag> => {
   try {
     return await window.electron.ipcRenderer.invoke(TAG_CHANNEL.ADD_TAG, tag);
@@ -58,7 +58,7 @@ export const addTag = async (tag: FileTag): Promise<FileTag> => {
   }
 };
 
-// Обновление существующего тега
+// Update an existing tag
 export const updateTag = async (tag: FileTag): Promise<FileTag> => {
   try {
     return await window.electron.ipcRenderer.invoke(TAG_CHANNEL.UPDATE_TAG, tag);
@@ -68,7 +68,7 @@ export const updateTag = async (tag: FileTag): Promise<FileTag> => {
   }
 };
 
-// Удаление тега
+// Remove a tag
 export const removeTag = async (tagId: string): Promise<void> => {
   try {
     await window.electron.ipcRenderer.invoke(TAG_CHANNEL.REMOVE_TAG, tagId);
@@ -78,7 +78,7 @@ export const removeTag = async (tagId: string): Promise<void> => {
   }
 };
 
-// Получение тегов для конкретного файла или папки
+// Get tags for a specific file or folder
 export const getTagsForPath = async (path: string): Promise<FileTag[]> => {
   try {
     return await window.electron.ipcRenderer.invoke(TAG_CHANNEL.GET_FILE_TAGS, path);
@@ -88,7 +88,7 @@ export const getTagsForPath = async (path: string): Promise<FileTag[]> => {
   }
 };
 
-// Добавление пути к тегу
+// Add path to tag
 export const addPathToTag = async (tagId: string, path: string): Promise<FileTag> => {
   try {
     return await window.electron.ipcRenderer.invoke(TAG_CHANNEL.ADD_PATH_TO_TAG, { tagId, path });
@@ -98,7 +98,7 @@ export const addPathToTag = async (tagId: string, path: string): Promise<FileTag
   }
 };
 
-// Удаление пути из тега
+// Remove path from tag
 export const removePathFromTag = async (tagId: string, path: string): Promise<FileTag> => {
   try {
     return await window.electron.ipcRenderer.invoke(TAG_CHANNEL.REMOVE_PATH_FROM_TAG, { tagId, path });

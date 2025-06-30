@@ -23,7 +23,6 @@ const TabBar: React.FC<TabBarProps> = ({
   return (
     <div className="Multopen">
         {tabs.map((tab) => {
-          // Создаем стили для отображения цвета тега
           const tabStyle = tab.tagColor ? { 
             borderLeft: `4px solid ${tab.tagColor}`,
             borderTopLeftRadius: '0',
